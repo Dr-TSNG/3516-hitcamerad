@@ -1,0 +1,20 @@
+import("//build/lite/config/component/lite_component.gni")
+
+executable("hitcamerad") {
+    include_dirs = [ "include" ]
+    sources = [
+        "circular_buffer.c",
+        "main.cpp",
+        "mycamera.cpp",
+        "udp.cpp",
+        "udp-piece.c"
+    ]
+
+    cflags = [ "-Wall" ]
+    cflags_cc = cflags
+    ldflags = [ "-lstdc++" ]
+    ldflags += [ "-lpthread" ]
+    ldflags += [ "-Wl,-rpath-link=$ohos_root_path/$root_out_dir" ]
+
+    output_dir = "$root_out_dir/dev_tools"
+}
