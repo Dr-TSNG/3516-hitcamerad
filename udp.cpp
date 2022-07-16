@@ -35,7 +35,7 @@ void InitUdp() {
 }
 
 bool SendUdp(void* data, int dataLen) {
-    std::lock_guard g(dataLock);
+    std::lock_guard<std::mutex> g(dataLock);
 
     int pieces = udp_piece_cut(udpPiece, data, dataLen);
     LOGD("pieces = %d", pieces);

@@ -1,6 +1,6 @@
 #include <cstring>
 #include <iostream>
-#include <sys/wait.h>
+#include <unistd.h>
 
 #include "base.h"
 #include "log.h"
@@ -30,7 +30,11 @@ void InitMain() {
 void EventLoop() {
     while (true) {
         Capture();
-        sleep(2);
+        static const struct timespec t {
+            .tv_sec = 0,
+            .tv_nsec = 500 * 1000
+        };
+        nanosleep(&t, nullptr);
     }
 }
 
